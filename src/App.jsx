@@ -1,37 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// src/App.jsx
+import { Routes, Route, Navigate } from 'react-router';
+import AdminLayout from './layouts/AdminLayout';
+import Dashboard from './pages/admin/Dashboard';
+import LoginPage from './pages/auth/Login';
+
+// Placeholder cho Product page để demo
+const Products = () => <div>Quản lý sản phẩm</div>;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Routes>
+      {/* Route cho Admin */}
+      <Route path="/admin" element={<AdminLayout />}>
+        {/* Mặc định vào admin sẽ nhảy sang dashboard */}
+        <Route index element={<Navigate to="dashboard" replace />} />
+        
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="products" element={<Products />} />
+        
+        {/* Các route khác thêm ở đây */}
+      </Route>
+
+      {/* Route cho Client (Tính sau) */}
+      <Route path="/" element={<div>Trang chủ khách hàng</div>} />
+      <Route path="/login" element={<LoginPage />} />
+      
+      {/* 404 Not Found */}
+      <Route path="*" element={<div>404 Không tìm thấy trang</div>} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

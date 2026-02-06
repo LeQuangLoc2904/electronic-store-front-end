@@ -1,6 +1,6 @@
 import { Search, Bell, ChevronDown, Menu } from "lucide-react";
 
-const Header = () => {
+const Header = ({ data }) => {
   return (
     <header className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10">
       {/* 1. Thanh tìm kiếm bên trái */}
@@ -47,7 +47,7 @@ const Header = () => {
           </div>
           
           <div className="hidden sm:block text-left">
-            <p className="text-sm font-bold text-[#202224]">Moni Roy</p>
+            <p className="text-sm font-bold text-[#202224]">{data?.username || "Guest"}</p>
             <p className="text-xs font-semibold text-[#5C5C5C]">Admin</p>
           </div>
 
